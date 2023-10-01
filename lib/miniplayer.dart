@@ -436,7 +436,7 @@ class ControllerData {
   final Duration? duration;
   late bool allowPan;
 
-  const ControllerData(this.height, this.duration, this.allowPan);
+  ControllerData(this.height, this.duration, this.allowPan);
 }
 
 //MiniplayerController class
