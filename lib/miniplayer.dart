@@ -434,7 +434,7 @@ enum PanelState { MAX, MIN, DISMISS }
 class ControllerData {
   final int height;
   final Duration? duration;
-  final bool allowPan;
+  late bool allowPan;
 
   const ControllerData(this.height, this.duration, this.allowPan);
 }
