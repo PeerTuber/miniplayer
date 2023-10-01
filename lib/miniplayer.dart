@@ -457,11 +457,11 @@ class MiniplayerController extends ValueNotifier<ControllerData?> {
     ControllerData? valBefore = value;
 
     if (state != null) {
-      value = ControllerData(state.heightCode, duration);
+      value = ControllerData(state.heightCode, duration, true);
     } else {
       if (height! < 0) return;
 
-      value = ControllerData(height.round(), duration);
+      value = ControllerData(height.round(), duration, true);
     }
 
     if (valBefore == value) {
