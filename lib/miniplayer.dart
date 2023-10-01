@@ -39,6 +39,9 @@ class Miniplayer extends StatefulWidget {
   ///This can be used to hide the BottomNavigationBar.
   final ValueNotifier<double>? valueNotifier;
 
+  ///Can allow tap to close
+  final bool allowTapToClose;
+
   ///Deprecated
   @Deprecated(
       "Migrate onDismiss to onDismissed as onDismiss will be used differently in a future version.")
@@ -62,6 +65,7 @@ class Miniplayer extends StatefulWidget {
     this.elevation = 0,
     this.backgroundColor,
     this.valueNotifier,
+    this.allowTapToClose = false,
     this.duration = const Duration(milliseconds: 300),
     this.onDismiss,
     this.onDismissed,
@@ -223,7 +227,7 @@ class _MiniplayerState extends State<Miniplayer> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
-                    onTap: () => _snapToPosition(_dragHeight != widget.maxHeight
+                    onTap: () => _dragHeight == widget.maxHeight && !allowTapToClose ? null : _snapToPosition(_dragHeight != widget.maxHeight
                         ? PanelState.MAX
                         : PanelState.MIN),
                     onPanStart: (details) {
