@@ -231,11 +231,11 @@ class _MiniplayerState extends State<Miniplayer> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
-                    onTap: () => _dragHeight == widget.maxHeight && !allowTapToClose ? null : _snapToPosition(_dragHeight != widget.maxHeight
+                    onTap: () => _dragHeight == widget.maxHeight && !widget.allowTapToClose ? null : _snapToPosition(_dragHeight != widget.maxHeight
                         ? PanelState.MAX
                         : PanelState.MIN),
                     onPanStart: (details) {
-                      if (!allowPan) return;
+                      if (!widget.allowPan) return;
 
                       _startHeight = _dragHeight;
                       updateCount = 0;
@@ -245,7 +245,7 @@ class _MiniplayerState extends State<Miniplayer> with TickerProviderStateMixin {
                       }
                     },
                     onPanEnd: (details) async {
-                      if (!allowPan) return;
+                      if (!widget.allowPan) return;
 
                       ///Calculates drag speed
                       double speed = (_dragHeight - _startHeight * _dragHeight <
@@ -302,7 +302,7 @@ class _MiniplayerState extends State<Miniplayer> with TickerProviderStateMixin {
                       _snapToPosition(snap);
                     },
                     onPanUpdate: (details) {
-                      if (!allowPan) return;
+                      if (!widget.allowPan) return;
 
                       if (dismissed) return;
 
