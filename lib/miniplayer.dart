@@ -42,6 +42,9 @@ class Miniplayer extends StatefulWidget {
   ///Can allow tap to close
   final bool allowTapToClose;
 
+  ///Can allow pan
+  final bool allowPan;
+
   ///Deprecated
   @Deprecated(
       "Migrate onDismiss to onDismissed as onDismiss will be used differently in a future version.")
@@ -66,6 +69,7 @@ class Miniplayer extends StatefulWidget {
     this.backgroundColor,
     this.valueNotifier,
     this.allowTapToClose = false,
+    this.allowPan = true,
     this.duration = const Duration(milliseconds: 300),
     this.onDismiss,
     this.onDismissed,
@@ -231,6 +235,8 @@ class _MiniplayerState extends State<Miniplayer> with TickerProviderStateMixin {
                         ? PanelState.MAX
                         : PanelState.MIN),
                     onPanStart: (details) {
+                      if (!allowPan) return;
+
                       _startHeight = _dragHeight;
                       updateCount = 0;
 
@@ -239,6 +245,8 @@ class _MiniplayerState extends State<Miniplayer> with TickerProviderStateMixin {
                       }
                     },
                     onPanEnd: (details) async {
+                      if (!allowPan) return;
+
                       ///Calculates drag speed
                       double speed = (_dragHeight - _startHeight * _dragHeight <
                                   _startHeight
@@ -294,6 +302,8 @@ class _MiniplayerState extends State<Miniplayer> with TickerProviderStateMixin {
                       _snapToPosition(snap);
                     },
                     onPanUpdate: (details) {
+                      if (!allowPan) return;
+
                       if (dismissed) return;
 
                       _dragHeight -= details.delta.dy;
